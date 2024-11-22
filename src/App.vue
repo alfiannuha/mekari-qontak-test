@@ -54,7 +54,7 @@
 <script>
 import { reactive, onMounted, ref } from 'vue';
 import { database, storage } from './lib/firebase';
-import uploadStorage from './lib/upload-storage';
+// import uploadStorage from './lib/upload-storage';
 import { getDatabase, ref as firebaseRef, set as firebaseSet, push as firebasePush, onValue } from "firebase/database";
 
 
@@ -67,6 +67,15 @@ export default {
       username: '',
       messages: [],
     });
+
+    // function file upload
+    // async function onFileChanged(e) {
+    //   console.log("event", e.target.files[0])
+
+    //   const imgUrl = await uploadStorage(e.target.files[0])
+
+    //   console.log(imgUrl);
+    // }
 
     // login to indetify user
     const Login = () => {
@@ -163,7 +172,7 @@ export default {
       state,
       inputMessage,
       SendMessage,
-      onFileChanged,
+      // onFileChanged,
       Logout,
     };
   },
