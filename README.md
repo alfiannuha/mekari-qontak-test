@@ -4,26 +4,26 @@ This template should help get you started developing with Vue 3 and TypeScript i
 
 Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
 
-### How to run this project
+## How to run this project
 
-## 1. Install dependencies with minimum node js 20 with
+### 1. Install dependencies with minimum node js 20
 
 ```
 npm install
 ```
 
-## 2. Then running application with
+### 2. Then running application
 
 ```
 npm run dev
 ```
 
-## 3. Application is running, then open in the browser
+### 3. Application is running, then open in the browser
 
-## 4. Login with your username, if test for admin please use username = admin
+### 4. Login with your username, if test for admin please use username = admin
 
-## 5. Enjoy your chat application
+### 5. Enjoy your chat application
 
-### Blocker
+## Blocker
 
-## 1. Cannot upload file, because must upgrade plan for firebase project
+### 1. Cannot upload file, because must upgrade plan for firebase project
