@@ -6,15 +6,24 @@ Learn more about the recommended Project Setup and IDE Support in the [Vue Docs 
 
 ### How to run this project
 
-## 1. Install dependencies with minimum node js 20 with 
+## 1. Install dependencies with minimum node js 20 with
+
 ```
 npm install
 ```
-## 2. Then running application with 
+
+## 2. Then running application with
+
 ```
 npm run dev
 ```
+
 ## 3. Application is running, then open in the browser
-## 4. Login with your username, if test for admin please use username = admin 
+
+## 4. Login with your username, if test for admin please use username = admin
+
 ## 5. Enjoy your chat application
 
+### Blocker
+
+## 1. Cannot upload file, because must upgrade plan for firebase project

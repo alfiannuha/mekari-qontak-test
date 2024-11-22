@@ -43,6 +43,8 @@
     <footer>
       <form @submit.prevent="SendMessage">
         <input type="text" v-model="inputMessage" placeholder="Write a message..." />
+        <!-- <input ref="upload" type="file" class="hidden" @change="(event) => onFileChanged(event)">
+        <button type="button" @click="$refs.upload.click()">file</button> -->
         <input type="submit" value="Send" />
       </form>
     </footer>
@@ -51,7 +53,8 @@
 
 <script>
 import { reactive, onMounted, ref } from 'vue';
-import firebaseDB from './firebase';
+import { database, storage } from './lib/firebase';
+import uploadStorage from './lib/upload-storage';
 import { getDatabase, ref as firebaseRef, set as firebaseSet, push as firebasePush, onValue } from "firebase/database";
 
 
@@ -65,6 +68,7 @@ export default {
       messages: [],
     });
 
+    // login to indetify user
     const Login = () => {
       if (inputUsername.value != '' || inputUsername.value != null) {
         state.username = inputUsername.value;
@@ -72,6 +76,7 @@ export default {
       }
     };
 
+    // write data in database messages
     const writeMessageData = (username, type, content) => {
       const db = getDatabase();
       firebasePush(firebaseRef(db, 'messages'), {
@@ -85,6 +90,7 @@ export default {
       state.username = '';
     };
 
+    // send message user
     const SendMessage = () => {
 
       if (inputMessage.value === '' || inputMessage.value === null) {
@@ -95,31 +101,37 @@ export default {
       // send message from user
       writeMessageData(state.username, 1, inputMessage.value)
 
+      // if either admin user name, admin will be send text auto replay
+      if (state.username !== "admin") {
+        const greetings = [
+          "hai",
+          "hello",
+          "helo",
+          "halo",
+          "hallo",
+          "selamat",
+          "pagi",
+          "siang",
+          "sore",
+          "malam",
+        ]
 
-      const greetings = [
-        "hello",
-        "helo",
-        "halo",
-        "hallo",
-        "siang",
-        "selamat",
-        "sore",
-        "malam",
-        "pagi",
-      ]
-
-      // send message from admin when is include greetings 
-      for (let i = 0; i < greetings.length; i++) {
-        const greet = greetings[i];
-        if (inputMessage.value.includes(greet)) {
-          writeMessageData("admin", 0, "Terimakasih telah menghubungi kami, ada yang bisa kami bantu atas permasalahannya? jika tidak ada akan kami tutup chat ini.");
-          break;
+        // send message from admin when is include greetings 
+        for (let i = 0; i < greetings.length; i++) {
+          const greet = greetings[i];
+          let content = inputMessage.value.toLowerCase()
+          if (content.includes(greet)) {
+            writeMessageData("admin", 0, "Terimakasih telah menghubungi kami, ada yang bisa kami bantu atas permasalahannya? jika tidak ada akan kami tutup chat ini.");
+            break;
+          }
         }
       }
 
+      // clear input message
       inputMessage.value = '';
     };
 
+    // read all message in room
     const readMessageDataList = () => {
       const db = getDatabase();
 
@@ -151,6 +163,7 @@ export default {
       state,
       inputMessage,
       SendMessage,
+      onFileChanged,
       Logout,
     };
   },
